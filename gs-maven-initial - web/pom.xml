@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.springframework.gs</groupId>
+  <artifactId>gs-maven-initial</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>
+
+  <name>gs-maven-initial</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+   <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>2.2</version>
+    </dependency>   
+
+    
+<!--    test  -->
+<!-- <dependency> -->
+<!-- 	<groupId>net.java.dev.glassfish</groupId> -->
+<!-- 	<artifactId>glassfish-transaction-api</artifactId> -->
+<!-- 	<version>b32g</version> -->
+<!-- </dependency> -->
+<!-- 添加后eclipse会自动给我下载到本地库.m2下 -->
+   
+        <dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-context</artifactId>  
+            <version>3.2.4.RELEASE</version>
+        </dependency>
+  </dependencies>
+  
+  
+  
+
+
+
+
+</project>

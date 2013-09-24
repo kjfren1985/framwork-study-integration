@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:mvc="http://www.springframework.org/schema/mvc"
+     xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop 
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/mvc 
+         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/data/jpa
+         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+         default-autowire="byName">
+         
+   <!-- spring mvc -->
+   <mvc:annotation-driven/>
+   <!-- 使用viewResolver -->
+   <bean id="viewResolver"
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/views/"/>
+    <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:interceptors>
+    <ref bean="mySpringMVCInterceptor"/>
+    </mvc:interceptors>
+         
+   <!-- spring   IOC -->
+   <!-- <context:component-scan base-package="com.study.service,com.study.aspect"/> -->
+   <context:component-scan base-package="com.study"/>
+   <context:annotation-config />
+   <!-- spring   AOP-->
+   <aop:aspectj-autoproxy/>
+   
+      <!-- JPA 1.此处添加配置文件 
+   2.项目添加JPA支持
+   (1.eclipse添加datasource(mysql-connector-java-5.1.7-bin.jar添加到类似的路径  jdk1.6.0_10\jre\lib\ext\mysql-connector-java-5.1.7-bin.jar) 
+   2.新建JPA Entities from Table) -->
+   <!-- 数据库连接池 -->  
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
+        destroy-method="close" scope="singleton">  
+        <property name="driverClassName">  
+            <value>com.mysql.jdbc.Driver</value>  
+        </property>  
+        <property name="url">  
+            <value>jdbc:mysql://localhost:3306/test</value>  
+        </property>  
+        <property name="username">  
+            <value>root</value>  
+        </property>  
+        <property name="password">  
+            <value>root</value>  
+        </property>  
+    </bean> 
+    
+        <!-- 配置实体管理对象 p:persistenceUnitManager-ref="persistenceUnitManager"-->  
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">  
+        <property name="persistenceUnitName" value="spring_study_004_JPATest-1" />  
+        <property name="dataSource" ref="dataSource" />    
+    </bean>  
+    
+      <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" lazy-init="true">  
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>  
+    </bean> 
+    
+    <jpa:repositories base-package="com.study.repository"/> 
+
+<!--    <jpa:auditing auditor-aware-ref="jpaAiditor"/>  -->
+   
+
+	</beans>
